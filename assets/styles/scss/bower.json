@@ -1,0 +1,21 @@
+{
+  "name": "ftv-smacss-scss",
+  "version": "0.0.0",
+  "authors": [
+    "Steven T <stton310@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.2.0",
+    "neat": "~1.8.0",
+    "normalize.css": "~3.0.3",
+    "FortAwesome/Font-Awesome": "*"
+  }
+}
