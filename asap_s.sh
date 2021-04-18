@@ -1,6 +1,6 @@
 if [ $# -eq 0 ]
 then
-  echo 'Please provide an argument.'
+  echo "Please provide an argument."
   exit 2
 else
   echo "Replacing…"
