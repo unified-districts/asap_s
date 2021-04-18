@@ -20,8 +20,6 @@ const plumber      = require('gulp-plumber');
 const sourcemaps   = require('gulp-sourcemaps');
 const terser       = require('gulp-terser');
 
-const server = browserSync.create();
-
 var notifyGeneric = {
     title: function () {
         return '<%= file.relative %>';
@@ -68,23 +66,6 @@ function vendorSass() {
     .pipe(notify(notifyGeneric));
 }
 
-function serve(done) {
-  server.init({
-    proxy: "asap-wp"
-  });
-  done();
-}
-
-function reload(done) {
-  server.reload();
-  done();
-}
-
-function reloadCSS(done) {
-  server.reload();
-  done();
-}
-
 function compress(){
   return src('assets/scripts/*.js')
   	.pipe(plumber({errorHandler: onError}))
@@ -121,17 +102,15 @@ function fonts() {
 }
 
 function watchFiles(){
-    watch('assets/styles/scss/**/*.scss',       series(css, reloadCSS));
-    watch('assets/styles/vendor/*.scss',        series(vendorSass, reloadCSS));
-    watch('assets/styles/vendor/*.css',         series(vendorSass, reloadCSS));
+    watch('assets/styles/scss/**/*.scss',       series(css));
+    watch('assets/styles/vendor/*.scss',        series(vendorSass));
+    watch('assets/styles/vendor/*.css',         series(vendorSass));
     watch('assets/scripts/*.js',                parallel(compress));
     watch('assets/fonts/*.+(ttf|woff|woff2|eot|svg)', parallel(fonts));
     watch('assets/scripts/vendor/*.js',         parallel(vendorCompress));
     watch('assets/images/*.+(png|jpg|gif|svg)', parallel(images));
-    watch('dist/scripts/*.min.js',              parallel(reload));
-    //watch('*.html', browserSync.reload);
 }
 
-exports.default = parallel(css, vendorSass, compress, vendorCompress, watchFiles, serve);
+exports.default = parallel(css, vendorSass, compress, vendorCompress, watchFiles);
 exports.compile = parallel(css, vendorSass, compress, vendorCompress, images);
-exports.watch   = parallel(watchFiles, serve);
+exports.watch   = parallel(watchFiles);
