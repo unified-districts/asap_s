@@ -7,17 +7,17 @@ A WordPress theme boilerplate with Gulp.
 * Local WordPress environment (works best with [asap-wp](https://github.com/530medialab/asap-wp))
 
 ## Installation
-  1. Clone into `/themes` directory
+  1. Clone into `/themes` directory  
     ```
     git clone http://github.com/530medialab/asap_s.git <project-name>
     ```
   2. Remove `.git` directory in new theme directory
   3. `cd` to the theme's directory
-  4. Use the provided Bash script to replace all instances of `asap_s` with the current project's title
+  4. Use the provided Bash script to replace all instances of `asap_s` with the current project's title  
     ```
     bash asap_s.sh <project title>
     ```
-  5. Install Node Packages
+  5. Install Node Packages  
     ```
     npm install
     ```
