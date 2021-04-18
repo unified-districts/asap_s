@@ -1,14 +1,26 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var rename = require("gulp-rename");
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var concat = require('gulp-concat');
-var autoprefixer = require('gulp-autoprefixer');
-var notify = require("gulp-notify");
-var plumber = require('gulp-plumber');
-var sourcemaps = require('gulp-sourcemaps');
+/*jshint esversion: 6 */
+
+const {
+  src,
+  dest,
+  parallel,
+  series,
+  watch
+} = require('gulp');
+
+const gulp         = require('gulp');
+const sass         = require('gulp-sass');
+const browserSync  = require('browser-sync');
+const rename       = require('gulp-rename');
+const imagemin     = require('gulp-imagemin');
+const concat       = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
+const notify       = require('gulp-notify');
+const plumber      = require('gulp-plumber');
+const sourcemaps   = require('gulp-sourcemaps');
+const terser       = require('gulp-terser');
+
+const server = browserSync.create();
 
 var notifyGeneric = {
     title: function () {
@@ -23,92 +35,103 @@ var notifyGeneric = {
         second: new Date().getSeconds()
     }
 };
-
 var onError = function(err) {
     notify.onError({
-                title:    "Gulp",
-                subtitle: "Failure!",
-                message:  "Error: <%= error.message %>",
-                sound:    "Sosumi"
-            })(err);
+      title:    "Gulp",
+      subtitle: "Failure!",
+      message:  "Error: <%= error.message %>",
+      sound:    "Sosumi"
+    })(err);
 
     this.emit('end');
 };
 
-gulp.task('default', ['sass', 'vendor-sass', 'compress', 'vendor-compress', 'watch'])
-
-gulp.task('compile', ['sass', 'vendor-sass', 'compress', 'vendor-compress', 'images']);
-
-gulp.task('sass', function(){
-  return gulp.src('assets/styles/scss/style.scss')
+function css() {
+  return src('assets/styles/scss/style.scss')
     .pipe(sourcemaps.init())
   	.pipe(plumber({errorHandler: onError}))
-    .pipe(sass().on('error', sass.logError)) // Using gulp-sass
+    .pipe(sass({
+        outputStyle: 'compressed'
+      }).on('error', sass.logError)) // Using gulp-sass
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('dist/styles'))
-    .pipe(notify(notifyGeneric))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-});
+    .pipe(dest('dist/styles'))
+    .pipe(notify(notifyGeneric));
+}
 
-gulp.task('vendor-sass', function(){
-  return gulp.src(['assets/styles/vendor/*.scss', 'assets/styles/vendor/*.css'])
+function vendorSass() {
+  return src(['assets/styles/vendor/*.scss', 'assets/styles/vendor/*.css'])
   	.pipe(plumber({errorHandler: onError}))
-    .pipe(sass().on('error', sass.logError)) // Using gulp-sass
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError)) // Using gulp-sass
     .pipe(concat('vendor.css'))
-    .pipe(gulp.dest('dist/styles'))
-    .pipe(notify(notifyGeneric))
-    .pipe(browserSync.reload({
-      stream: true
-    }))
-});
+    .pipe(dest('dist/styles'))
+    .pipe(notify(notifyGeneric));
+}
 
-gulp.task('browserSync', function() {
-  browserSync.init({
-      proxy: "local.wordpress.com"
-  })
-});
+function serve(done) {
+  server.init({
+    proxy: "asap-wp"
+  });
+  done();
+}
 
-gulp.task('compress', function() {
-  return gulp.src('assets/scripts/*.js')
+function reload(done) {
+  server.reload();
+  done();
+}
+
+function reloadCSS(done) {
+  server.reload();
+  done();
+}
+
+function compress(){
+  return src('assets/scripts/*.js')
   	.pipe(plumber({errorHandler: onError}))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(dest('dist/scripts'))
     .pipe(notify(notifyGeneric));
-});
+}
 
-gulp.task('vendor-compress', function() {
-  return gulp.src('assets/scripts/vendor/*.js')
+function vendorCompress(){
+  return src('assets/scripts/vendor/*.js')
   	.pipe(plumber({errorHandler: onError}))
     .pipe(concat('vendor.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/scripts'))
+    .pipe(terser())
+    .pipe(dest('dist/scripts'))
     .pipe(notify(notifyGeneric));
-});
+}
 
-gulp.task('images', function(){
-  return gulp.src('assets/images/**/*.+(png|jpg|gif|svg)')
-	.pipe(imagemin({
-	  // Setting interlaced to true
-	  interlaced: true
-	}))
-	.pipe(gulp.dest('dist/images'))
-	.pipe(notify(notifyGeneric));
-});
+function images() {
+  return src('assets/images/**/*.+(png|jpg|gif|svg)')
+  	.pipe(imagemin({
+  	  interlaced: true
+  	}))
+  	.pipe(dest('dist/images'))
+  	.pipe(notify(notifyGeneric));
+}
 
+function fonts() {
+  return src('assets/fonts/*.+(ttf|woff|woff2|eot|svg)')
+  	.pipe(dest('dist/fonts'))
+  	.pipe(notify(notifyGeneric));
+}
 
+function watchFiles(){
+    watch('assets/styles/scss/**/*.scss',       series(css, reloadCSS));
+    watch('assets/styles/vendor/*.scss',        series(vendorSass, reloadCSS));
+    watch('assets/styles/vendor/*.css',         series(vendorSass, reloadCSS));
+    watch('assets/scripts/*.js',                parallel(compress));
+    watch('assets/fonts/*.+(ttf|woff|woff2|eot|svg)', parallel(fonts));
+    watch('assets/scripts/vendor/*.js',         parallel(vendorCompress));
+    watch('assets/images/*.+(png|jpg|gif|svg)', parallel(images));
+    watch('dist/scripts/*.min.js',              parallel(reload));
+    //watch('*.html', browserSync.reload);
+}
 
-gulp.task('watch', ['browserSync'], function () {
-    gulp.watch('assets/styles/scss/**/*.scss', ['sass']);
-    gulp.watch(['assets/styles/vendor/*.scss', 'assets/styles/vendor/*.css'], ['vendor-sass']);
-    gulp.watch('assets/scripts/*.js', ['compress']);
-    gulp.watch('assets/scripts/vendor/*.js', ['vendor-compress']);
-    gulp.watch('assets/images/*.+(png|jpg|gif|svg)', ['images']);
-    //gulp.watch('*.html', browserSync.reload); 
-    gulp.watch('dist/scripts/*.min.js', browserSync.reload); 
-});
+exports.default = parallel(css, vendorSass, compress, vendorCompress, watchFiles, serve);
+exports.compile = parallel(css, vendorSass, compress, vendorCompress, images);
+exports.watch   = parallel(watchFiles, serve);
