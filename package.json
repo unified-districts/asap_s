@@ -1,12 +1,12 @@
 {
-  "name": "gulp",
-  "version": "1.0.0",
-  "description": "",
+  "name": "asap_s",
+  "version": "2.0.0",
+  "description": "A bare-bones boilerplate built by webpack",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Justin",
+  "author": "Unified Districts",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.12.8"
