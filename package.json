@@ -4,7 +4,8 @@
   "description": "A bare-bones boilerplate built by webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development"
   },
   "author": "Unified Districts",
   "license": "ISC",
