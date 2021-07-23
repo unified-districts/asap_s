@@ -1,0 +1,21 @@
+$blue:        #477dca;
+$dark-gray:   #333;
+$medium-gray: #999;
+$light-gray:  #ddd;
+
+// Fonts
+$background: #fff;
+$font:       $dark-gray;
+$action:     $blue;
+
+// Border
+$border: $light-gray;
+
+// Forms
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action, $lightness: -5%, $alpha: -0.3);
+
+// WooCommerce
+$woo-error:   #e2401c;
+$woo-success: #0f834d;
+$woo-info:    #3d9cd2;

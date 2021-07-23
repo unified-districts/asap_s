@@ -1,17 +1,22 @@
-#{$buttons-list},
+@use "variables/buttons"    as buttons;
+@use "variables/elements"   as elements;
+@use "variables/typography" as typography;
+@use "variables/color"      as color;
+
+#{buttons.$list},
 button {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
   -webkit-font-smoothing: antialiased;
-  background-color: $action-color;
-  border-radius: $base-border-radius;
+  background-color: color.$action;
+  border-radius: elements.$border-radius;
   border: none;
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-family: typography.$base-family;
+  font-size: typography.$base-size;
   font-weight: 600;
   line-height: 1;
   padding: 0.75em 1em;
@@ -22,7 +27,7 @@ button {
 
   &:hover,
   &:focus {
-    background-color: darken($action-color, 15%);
+    background-color: darken(color.$action, 15%);
     color: #fff;
   }
 

@@ -1,3 +1,8 @@
+@use 'variables/typography' as typography;
+@use 'variables/spacing'    as spacing;
+@use 'variables/color'      as color;
+@use 'variables/elements'   as elements;
+
 * {
   box-sizing: border-box;
 }
@@ -5,9 +10,9 @@
 body {
   -webkit-font-smoothing: antialiased;
   color: $base-font-color;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
-  line-height: $base-line-height;
+  font-family: typography.$base-family;
+  font-size: typography.$base-size;
+  line-height: typography.$base-line-height;
 }
 
 h1,
@@ -16,42 +21,42 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
-  margin: 0 0 $small-spacing;
+  font-family: typography.$heading-family;
+  line-height: typography.$heading-line-height;
+  margin: 0 0 spacing.$small;
 }
 h1 {
-  font-size: $base-font-size + 1;
+  font-size: typography.$base-size + 1;
 }
 h2 {
-  font-size: $base-font-size + 0.5;
+  font-size: typography.$base-size + 0.5;
 }
 h3 {
-  font-size: $base-font-size + 0.17;
+  font-size: typography.$base-size + 0.17;
 }
 h4 {
-  font-size: $base-font-size;
+  font-size: typography.$base-size;
 }
 h5 {
-  font-size: $base-font-size - 0.17;
+  font-size: typography.$base-size - 0.17;
 }
 h6 {
-  font-size: $base-font-size - 0.33;
+  font-size: typography.$base-size - 0.33;
 }
 
 p {
-  margin: 0 0 $small-spacing;
+  margin: 0 0 spacing.$small;
 }
 
 a {
-  color: $action-color;
+  color: color.$action;
   text-decoration: none;
   transition: color 0.1s linear;
 
   &:active,
   &:focus,
   &:hover {
-    color: darken($action-color, 15%);
+    color: darken(color.$action, 15%);
   }
 
   &:active,
@@ -64,11 +69,11 @@ a {
 }
 
 hr {
-  border-bottom: $base-border;
+  border-bottom: elements.$border;
   border-left: none;
   border-right: none;
   border-top: none;
-  margin: $base-spacing 0;
+  margin: spacing.$base 0;
 }
 
 img,

@@ -1,3 +1,5 @@
+@use "../../variables/color" as color;
+
 .single-product {
 
 	div.product {
@@ -77,10 +79,10 @@
 	}
 
 	&.in-stock {
-		color: $woocommerce__color-success;
+		color: color.$woo-success;
 	}
 
 	&.out-of-stock {
-		color: $woocommerce__color-error;
+		color: color.$woo-error;
 	}
 }
