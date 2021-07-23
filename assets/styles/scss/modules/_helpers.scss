@@ -1,6 +1,3 @@
-/* ==========================================================================
-   Helpers
-   ========================================================================== */
 @use '../variables/breakpoints' as breakpoints;
 
 .hide--mobile{
@@ -34,12 +31,6 @@
 	}
 }
 
-.slick-slider{
-	overflow:hidden;
-}
-.slick-track{
-	width:100%;
-}
 .opacity--hover{
 	opacity:1;
 	-webkit-transition:opacity 0.2s linear;
