@@ -8,6 +8,14 @@
   },
   "author": "Unified Districts",
   "license": "ISC",
+  "keywords": [
+    "wordpress",
+    "wp",
+    "webpack",
+    "boilerplate",
+    "unified",
+    "districts"
+  ],
   "devDependencies": {
     "browser-sync": "^2.12.8"
   }
