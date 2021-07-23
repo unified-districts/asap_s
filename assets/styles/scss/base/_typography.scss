@@ -9,7 +9,7 @@
 
 body {
   -webkit-font-smoothing: antialiased;
-  color: $base-font-color;
+  color: color.$font;
   font-family: typography.$base-family;
   font-size: typography.$base-size;
   line-height: typography.$base-line-height;

@@ -10,7 +10,7 @@ table {
 }
 
 th {
-  border-bottom: 1px solid darken($base-border-color, 15%);
+  border-bottom: 1px solid darken(color.$border, 15%);
   font-weight: 600;
   padding: spacing.$small 0;
   text-align: left;
