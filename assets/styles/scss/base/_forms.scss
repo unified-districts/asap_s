@@ -22,7 +22,7 @@ select {
 
 label {
   font-weight: 600;
-  margin-bottom: math.div($small-spacing, 2);
+  margin-bottom: math.div(spacing.$small, 2);
 
   &.required::after {
     content: "*";
@@ -72,7 +72,7 @@ input[type="search"] {
 input[type="checkbox"],
 input[type="radio"] {
   display: inline;
-  margin-right: math.div($small-spacing, 2);
+  margin-right: math.div(spacing.$small, 2);
 }
 
 input[type="file"] {
