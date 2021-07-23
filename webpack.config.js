@@ -2,6 +2,7 @@ const path                  = require('path');
 const webpack               = require('webpack');
 const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const TerserPlugin          = require('terser-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -10,6 +11,11 @@ module.exports = {
     ],
     devtool: 'source-map',
     mode:    'production',
+    optimization: {
+      minimizer: [new TerserPlugin({
+        extractComments: false,
+      })],
+    },
     output: {
       filename: 'main.js',
       path:      path.resolve(__dirname, 'dist/scripts/')
