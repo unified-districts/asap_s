@@ -2,19 +2,22 @@
 
 .hide--mobile{
 	display:none;
-	@include media($mobile-up){
+	
+	@media (max-width: breakpoints.$mobile){
 		display:block;
 	}
 }
 .hide--tablet{
 	display:none;
-	@include media($tablet-up){
+	
+	@media (max-width: breakpoints.$tablet){
 		display:block;
 	}
 }
 .hide--desktop{
 	display:block;
-	@include media($tablet-up){
+	
+	@media (max-width: breakpoints.$tablet){
 		display:none;
 	}
 }
