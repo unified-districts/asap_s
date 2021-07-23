@@ -1,7 +1,7 @@
-@use 'variables/typography' as typography;
-@use 'variables/spacing'    as spacing;
-@use 'variables/color'      as color;
-@use 'variables/elements'   as elements;
+@use '../variables/typography' as typography;
+@use '../variables/spacing'    as spacing;
+@use '../variables/color'      as color;
+@use '../variables/elements'   as elements;
 
 * {
   box-sizing: border-box;

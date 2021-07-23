@@ -1,2 +1,2 @@
-$base: $base-line-height * 1em;
-$small: math.div($base-spacing, 2);
+@use 'sass:math';
+@use 'typography' as typography;

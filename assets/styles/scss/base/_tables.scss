@@ -1,5 +1,6 @@
-@use 'variables/spacing' as spacing;
-@use 'variables/elements' as elements;
+@use '../variables/spacing'  as spacing;
+@use '../variables/elements' as elements;
+@use '../variables/color'    as color;
 
 table {
   border-collapse: collapse;

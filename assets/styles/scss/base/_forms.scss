@@ -1,4 +1,9 @@
 @use 'sass:math';
+@use '../variables/color'      as color;
+@use '../variables/typography' as typography;
+@use '../variables/elements'   as elements;
+@use '../variables/spacing'    as spacing;
+@use '../variables/inputs'     as inputs;
 
 fieldset {
   background-color: lighten($base-border-color, 10%);

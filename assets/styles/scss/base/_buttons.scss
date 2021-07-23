@@ -1,7 +1,7 @@
-@use "variables/buttons"    as buttons;
-@use "variables/elements"   as elements;
-@use "variables/typography" as typography;
-@use "variables/color"      as color;
+@use "../variables/buttons"    as buttons;
+@use "../variables/elements"   as elements;
+@use "../variables/typography" as typography;
+@use "../variables/color"      as color;
 
 #{buttons.$list},
 button {
