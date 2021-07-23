@@ -6,8 +6,8 @@ const TerserPlugin          = require('terser-webpack-plugin');
 
 module.exports = {
     entry: [
-      './scripts/index.js',
-      '/styles/scss/style.scss'
+      './assets/scripts/index.js',
+      './assets/styles/scss/style.scss'
     ],
     devtool: 'source-map',
     mode:    'production',
