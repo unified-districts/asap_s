@@ -4,7 +4,7 @@
   "description": "A bare-bones boilerplate built by webpack",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "watch": "webpack --watch --mode=development"
   },
   "author": "Unified Districts",

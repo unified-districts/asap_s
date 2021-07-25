@@ -120,9 +120,9 @@ function asap_s_scripts() {
 			strpos($url, 'dev')       !== false ||
 			strpos($url, 'staging')       !== false ||
 			strpos($url, 'local')     !== false):
-	    	wp_enqueue_script( 'asap_s-script-main', get_template_directory_uri() . '/assets/scripts/main.js', array('jquery'), '', true );
+	    	wp_enqueue_script( 'asap_s-script-main', get_template_directory_uri() . '/dist/scripts/main.js', '', '', true );
 	else:
-		wp_enqueue_script( 'asap_s-script-main', get_template_directory_uri() . '/dist/scripts/main.min.js', array('jquery'), '', true );
+		wp_enqueue_script( 'asap_s-script-main', get_template_directory_uri() . '/dist/scripts/main.min.js', '', '', true );
 	endif;
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

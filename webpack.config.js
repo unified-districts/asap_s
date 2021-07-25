@@ -4,8 +4,11 @@ const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const TerserPlugin          = require('terser-webpack-plugin');
 
-module.exports = {
-    entry: [
+module.exports = (environnment, options) => {
+    console.log(options.mode);
+    
+    return {
+      entry: [
       './assets/scripts/index.js',
       './assets/styles/scss/style.scss'
     ],
@@ -17,8 +20,8 @@ module.exports = {
       })],
     },
     output: {
-      filename: 'main.js',
-      path:      path.resolve(__dirname, 'dist/scripts/')
+      filename: options.mode === 'production' ? '[name].min.js' : '[name].js',
+      path:     path.resolve(__dirname, 'dist/scripts/')
     },
     module: {
       rules: [
@@ -43,4 +46,5 @@ module.exports = {
       }),
       new WebpackNotifierPlugin()
     ]
+  }
 };
